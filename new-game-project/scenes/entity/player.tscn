@@ -2,6 +2,46 @@
 
 [ext_resource type="Texture2D" uid="uid://bnxhpcpg2uk7n" path="res://assets/entity/player.png" id="1_hsefk"]
 
+[sub_resource type="GDScript" id="GDScript_1obkj"]
+resource_name = "player"
+script/source = "extends CharacterBody2D
+
+@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
+
+
+const SPEED = 300.0
+var last_direction: Vector2 = Vector2.RIGHT
+
+	
+func _physics_process(_delta: float) -> void:
+	process_movement()
+	process_animation()
+	move_and_slide()
+	
+func process_movement() -> void:
+	var direction := Input.get_vector(\"left\", \"right\", \"up\", \"down\")
+	if direction != Vector2.ZERO:
+		velocity = direction * SPEED;
+		last_direction = direction
+	else:
+		velocity = Vector2.ZERO
+		
+func process_animation() -> void:
+	if (velocity != Vector2.ZERO):
+		play_animation(\"run\", last_direction)
+	else:
+		play_animation(\"idle\",last_direction)
+		
+func play_animation(prefix: String, dir: Vector2) -> void:
+		if dir.x != 0:
+			animated_sprite_2d.flip_h = dir.x < 0
+			animated_sprite_2d.play(prefix + \"_right\")
+		elif dir.y < 0:
+			animated_sprite_2d.play(prefix + \"_up\")
+		elif dir.y > 0:
+			animated_sprite_2d.play(prefix + \"_down\")
+"
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xlvtu"]
 size = Vector2(11, 11)
 
@@ -387,7 +427,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1obkj"]
+size = Vector2(15, 15)
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=172523556]
+script = SubResource("GDScript_1obkj")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=633351713]
 position = Vector2(0.5, 13.5)
@@ -398,7 +442,16 @@ sprite_frames = SubResource("SpriteFrames_11f4w")
 animation = &"idle_down"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1404408826]
+zoom = Vector2(0.75, 0.75)
 limit_left = 0
 limit_top = 0
 limit_right = 2560
 limit_bottom = 2304
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1262790202]
+position = Vector2(9, 0)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1805849116]
+position = Vector2(0.5, 9.5)
+shape = SubResource("RectangleShape2D_1obkj")
