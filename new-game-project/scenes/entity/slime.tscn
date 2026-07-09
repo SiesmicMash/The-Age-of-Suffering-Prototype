@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dm5ok2miowdsa"]
 
-[ext_resource type="Texture2D" uid="uid://buxrhemjgscsh" path="res://assets/entity/slime.png" id="1_hciuu"]
+[ext_resource type="Texture2D" uid="uid://buxrhemjgscsh" path="res://assets/entity/enemy/slime.png" id="1_hciuu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xsaob"]
 atlas = ExtResource("1_hciuu")
@@ -196,7 +196,7 @@ radius = 150.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2037299213]
 sprite_frames = SubResource("SpriteFrames_1desu")
-animation = &"idle"
+animation = &"attack"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1878047374]
 position = Vector2(0, 2)

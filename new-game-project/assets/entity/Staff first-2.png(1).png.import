@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://buxrhemjgscsh"
-path="res://.godot/imported/slime.png-a392330c9be03d365262f583741671ad.ctex"
+uid="uid://3d7x74a5e6v8"
+path="res://.godot/imported/Staff first-2.png(1).png-1c6e73618144e0b0f5da96b884b6741b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entity/slime.png"
-dest_files=["res://.godot/imported/slime.png-a392330c9be03d365262f583741671ad.ctex"]
+source_file="res://assets/entity/Staff first-2.png(1).png"
+dest_files=["res://.godot/imported/Staff first-2.png(1).png-1c6e73618144e0b0f5da96b884b6741b.ctex"]
 
 [params]
 

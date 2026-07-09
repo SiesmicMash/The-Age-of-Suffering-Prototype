@@ -1,46 +1,7 @@
 [gd_scene format=3 uid="uid://dmxsnmsy6ur4v"]
 
-[ext_resource type="Texture2D" uid="uid://bnxhpcpg2uk7n" path="res://assets/entity/player.png" id="1_hsefk"]
-
-[sub_resource type="GDScript" id="GDScript_1obkj"]
-resource_name = "player"
-script/source = "extends CharacterBody2D
-
-@onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
-
-
-const SPEED = 300.0
-var last_direction: Vector2 = Vector2.RIGHT
-
-	
-func _physics_process(_delta: float) -> void:
-	process_movement()
-	process_animation()
-	move_and_slide()
-	
-func process_movement() -> void:
-	var direction := Input.get_vector(\"left\", \"right\", \"up\", \"down\")
-	if direction != Vector2.ZERO:
-		velocity = direction * SPEED;
-		last_direction = direction
-	else:
-		velocity = Vector2.ZERO
-		
-func process_animation() -> void:
-	if (velocity != Vector2.ZERO):
-		play_animation(\"run\", last_direction)
-	else:
-		play_animation(\"idle\",last_direction)
-		
-func play_animation(prefix: String, dir: Vector2) -> void:
-		if dir.x != 0:
-			animated_sprite_2d.flip_h = dir.x < 0
-			animated_sprite_2d.play(prefix + \"_right\")
-		elif dir.y < 0:
-			animated_sprite_2d.play(prefix + \"_up\")
-		elif dir.y > 0:
-			animated_sprite_2d.play(prefix + \"_down\")
-"
+[ext_resource type="Script" uid="uid://dq8jhvtqevfq7" path="res://scripts/player.gd" id="1_gdab3"]
+[ext_resource type="Texture2D" uid="uid://bnxhpcpg2uk7n" path="res://assets/entity/player/player.png" id="1_hsefk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xlvtu"]
 size = Vector2(11, 11)
@@ -76,6 +37,22 @@ region = Rect2(96, 336, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_a3sao"]
 atlas = ExtResource("1_hsefk")
 region = Rect2(144, 336, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdab3"]
+atlas = ExtResource("1_hsefk")
+region = Rect2(0, 384, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tgyl1"]
+atlas = ExtResource("1_hsefk")
+region = Rect2(48, 384, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_poj5f"]
+atlas = ExtResource("1_hsefk")
+region = Rect2(96, 384, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4y4uh"]
+atlas = ExtResource("1_hsefk")
+region = Rect2(144, 384, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7eadb"]
 atlas = ExtResource("1_hsefk")
@@ -248,7 +225,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_p7obe")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_down",
 "speed": 5.0
 }, {
@@ -265,12 +242,24 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_a3sao")
 }],
-"loop": true,
+"loop": false,
 "name": &"attack_right",
 "speed": 5.0
 }, {
-"frames": [],
-"loop": true,
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdab3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tgyl1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_poj5f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4y4uh")
+}],
+"loop": false,
 "name": &"attack_up",
 "speed": 5.0
 }, {
@@ -401,7 +390,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"run_right",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -431,7 +420,7 @@ animations = [{
 size = Vector2(15, 15)
 
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=172523556]
-script = SubResource("GDScript_1obkj")
+script = ExtResource("1_gdab3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=633351713]
 position = Vector2(0.5, 13.5)
@@ -439,7 +428,7 @@ shape = SubResource("RectangleShape2D_xlvtu")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=949128507]
 sprite_frames = SubResource("SpriteFrames_11f4w")
-animation = &"idle_down"
+animation = &"attack_down"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1404408826]
 zoom = Vector2(0.75, 0.75)
@@ -448,10 +437,12 @@ limit_top = 0
 limit_right = 2560
 limit_bottom = 2304
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1262790202]
+[node name="attack_hitbox" type="Area2D" parent="." unique_id=1262790202]
 position = Vector2(9, 0)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1805849116]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitbox" unique_id=1805849116]
 position = Vector2(0.5, 9.5)
 shape = SubResource("RectangleShape2D_1obkj")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

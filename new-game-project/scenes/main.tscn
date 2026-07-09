@@ -5,4 +5,3 @@
 [node name="main" type="Node2D" unique_id=116299501]
 
 [node name="BaseWorld" parent="." unique_id=1328420293 instance=ExtResource("1_o5qli")]
-y_sort_enabled = true

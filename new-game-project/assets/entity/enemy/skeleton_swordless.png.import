@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://duh5gtksm7bp0"
-path="res://.godot/imported/skeleton.png-1cb1b8e5ba5db4608b7eb0230f68d17f.ctex"
+uid="uid://cfihedl08rbnx"
+path="res://.godot/imported/skeleton_swordless.png-81695aa4fbc216ee650c81486a45b8e1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/entity/skeleton.png"
-dest_files=["res://.godot/imported/skeleton.png-1cb1b8e5ba5db4608b7eb0230f68d17f.ctex"]
+source_file="res://assets/entity/enemy/skeleton_swordless.png"
+dest_files=["res://.godot/imported/skeleton_swordless.png-81695aa4fbc216ee650c81486a45b8e1.ctex"]
 
 [params]
 
