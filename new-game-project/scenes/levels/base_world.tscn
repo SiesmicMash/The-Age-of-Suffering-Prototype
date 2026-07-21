@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://625jbwk7gmd" path="res://assets/map/outdoor/decoration/fences.png" id="6_6l1n3"]
 [ext_resource type="Texture2D" uid="uid://simtkmbpjv2f" path="res://assets/map/outdoor/decoration/Cliff_Tile.png" id="7_mapvs"]
 [ext_resource type="PackedScene" uid="uid://dmxsnmsy6ur4v" path="res://scenes/entity/player.tscn" id="8_3i1wt"]
+[ext_resource type="PackedScene" uid="uid://dm5ok2miowdsa" path="res://scenes/entity/slime.tscn" id="9_kbfkh"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_s5fsq"]
 texture = ExtResource("1_p5h7j")
@@ -169,3 +170,6 @@ collision_visibility_mode = 1
 [node name="Player" parent="." unique_id=172523556 instance=ExtResource("8_3i1wt")]
 position = Vector2(205, 360)
 scale = Vector2(4, 4)
+
+[node name="Slime" parent="." unique_id=1729729146 instance=ExtResource("9_kbfkh")]
+position = Vector2(701, 410)

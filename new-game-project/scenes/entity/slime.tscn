@@ -183,28 +183,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"move",
-"speed": 5.0
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k11sm"]
 size = Vector2(16, 12)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_fronu"]
-radius = 150.0
-
-[node name="Slime" type="CharacterBody2D" unique_id=1729729146]
+[node name="slime" type="CharacterBody2D" unique_id=1729729146]
+scale = Vector2(3, 3)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2037299213]
 sprite_frames = SubResource("SpriteFrames_1desu")
-animation = &"attack"
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.6180409
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1878047374]
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_k11sm")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=2041006739]
-
-[node name="Sight" type="Area2D" parent="." unique_id=238663421]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sight" unique_id=2105137527]
-shape = SubResource("CircleShape2D_fronu")
