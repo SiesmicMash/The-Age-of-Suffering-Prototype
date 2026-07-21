@@ -413,16 +413,25 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1obkj"]
-size = Vector2(15, 15)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gdab3"]
+size = Vector2(12, 10)
 
-[node name="CharacterBody2D" type="CharacterBody2D" unique_id=172523556]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1obkj"]
+size = Vector2(13.75, 14.375)
+
+[node name="player" type="CharacterBody2D" unique_id=172523556]
 scale = Vector2(4, 4)
 script = ExtResource("1_gdab3")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=949128507]
 sprite_frames = SubResource("SpriteFrames_11f4w")
-animation = &"attack_down"
+animation = &"attack_right"
+frame = 3
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=384520261]
+position = Vector2(0, 14)
+shape = SubResource("RectangleShape2D_gdab3")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1404408826]
 zoom = Vector2(0.75, 0.75)
@@ -433,9 +442,10 @@ limit_bottom = 2304
 
 [node name="attack_hitbox" type="Area2D" parent="." unique_id=1262790202]
 position = Vector2(9, 0)
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="attack_hitbox" unique_id=1805849116]
-position = Vector2(0.5, 9.5)
+position = Vector2(0.75, 10)
 shape = SubResource("RectangleShape2D_1obkj")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
