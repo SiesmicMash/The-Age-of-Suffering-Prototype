@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const SPEED: int = 100
 const KNOCKBACK_FORCE: int = 100
+const STOP_DISTANCE = 40
 
 var is_alive = true
 var target = null
@@ -15,9 +16,15 @@ func _physics_process(delta: float) -> void:
 	if is_alive and target:
 		_attack(delta)
 
-func _attack(delta: float) -> void:
-	var direction = (target.position - position).normalized()
-	position += direction * SPEED * delta
+func _attack(_delta: float) -> void:
+	var distance = global_position.distance_to(target.global_position)
+	print("distance: ", distance, " velocity: ", velocity)
+	if distance > STOP_DISTANCE:
+		var direction = (target.global_position - global_position).normalized()
+		velocity = direction * SPEED 
+	else:
+		velocity = Vector2.ZERO
+	move_and_slide()
 	animated_sprite_2d.play("attack")
 
 func take_damage(damage: int, attacker_position: Vector2) -> void:
